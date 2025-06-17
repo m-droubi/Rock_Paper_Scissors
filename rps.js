@@ -31,17 +31,23 @@ function playRound(humanChoice, computerChoice) {
         txt.textContent = `drow!
                            Your score: ${humanScore}
                            Computer score: ${computerScore}`;
-    } else if (((s == rock) && (n == scissors)) || ((s == scissors) && (n == paper)) || ((s == paper) && (n == rock))) {
-        (humanScore++)
+    } else if ((humanScore < 4) && (((s == rock) && (n == scissors)) || ((s == scissors) && (n == paper)) || ((s == paper) && (n == rock)))) {
         txt.textContent = `Your ${s} beat the ${computerChoice}
-                           Your score: ${humanScore}
+                           Your score: ${++humanScore}
                            Computer score: ${computerScore}`;
-    } else if (((n == rock) && (s == scissors)) || ((n == scissors) && (s == paper)) || ((n == paper) && (s == rock))) {
-        (computerScore++)
+    } else if ((computerScore < 4) && (((n == rock) && (s == scissors)) || ((n == scissors) && (s == paper)) || ((n == paper) && (s == rock)))) {
         txt.textContent = `The ${computerChoice} beat your ${s}
                            Your score: ${humanScore}
-                           Computer score: ${computerScore}`;
-    }
+                           Computer score: ${++computerScore}`;
+    } else if((humanScore == 4) && (((s == rock) && (n == scissors)) || ((s == scissors) && (n == paper)) || ((s == paper) && (n == rock)))) { 
+      txt.textContent = `you won
+                         Your score: ${++humanScore}
+                         Computer score: ${computerScore}`;  
+   } else if((computerScore == 4) && (((n == rock) && (s == scissors)) || ((n == scissors) && (s == paper)) || ((n == paper) && (s == rock)))) {
+      txt.textContent = `game over
+                         Your score: ${humanScore}
+                         Computer score: ${++computerScore}`;
+   } 
 } 
 
 
@@ -52,10 +58,6 @@ gop.addEventListener('click', (event) => {
    getComputerChoice()
    if(humanScore < 5 && computerScore < 5) {
    playRound(humanSelection, computerSelection);
-   } else if(humanScore == 5) { 
-      txt.textContent = `you won`  
-   } else if(computerScore == 5) {
-      txt.textContent = `game over`
    }
 });
 
